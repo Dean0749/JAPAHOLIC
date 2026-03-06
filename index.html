@@ -10,10 +10,9 @@
         :root {
             --muji-bg: #F4F3F0;
             --muji-paper: #FFFFFF;
-            --muji-text: #1A1A1A; /* 調深文字顏色 */
-            --muji-gray: #4A4A4A; /* 加深灰色 */
+            --muji-text: #1A1A1A;
+            --muji-gray: #4A4A4A;
             --muji-light-gray: #D1D1D1;
-            --muji-accent: #5F6659;
         }
 
         body {
@@ -27,18 +26,18 @@
 
         .serif { font-family: 'Noto Serif TC', serif; font-weight: 900; }
 
-        /* 進度條美化 */
+        /* 進度條 */
         .progress-container {
-            max-width: 400px;
+            max-width: 450px;
             margin: 0 auto;
             background: white;
-            padding: 16px;
-            border-radius: 16px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
         }
 
         .progress-track {
-            height: 6px;
+            height: 8px;
             background: #E8E8E8;
             border-radius: 10px;
             overflow: hidden;
@@ -51,49 +50,33 @@
             transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* 地圖核心樣式 */
+        /* 地圖樣式 */
         .pref-path {
             fill: var(--muji-paper);
-            stroke: #999; /* 加深線條 */
+            stroke: #888;
             stroke-width: 1.2;
             transition: all 0.2s ease;
             cursor: pointer;
         }
 
-        .pref-path:hover {
-            fill: #F0F0F0;
-            stroke: #333;
-            filter: drop-shadow(0 0 5px rgba(0,0,0,0.1));
-        }
+        .visited { fill: #E2E1DD !important; stroke: #444 !important; }
+        .planning { fill: #FFFFFF !important; stroke: #1A1A1A !important; stroke-dasharray: 4,4; }
 
-        .visited {
-            fill: #E2E1DD !important;
-            stroke: #666 !important;
-        }
-
-        .planning {
-            fill: #FFFFFF !important;
-            stroke: #333 !important;
-            stroke-dasharray: 4,4;
-        }
-
-        /* 標籤文字加強 */
         .label-text {
-            font-size: 11px; /* 放大字體 */
-            fill: #1A1A1A; /* 調深顏色 */
+            font-size: 11px;
+            fill: #000;
             pointer-events: none;
             text-anchor: middle;
-            font-weight: 700;
+            font-weight: 900;
             paint-order: stroke;
             stroke: white;
-            stroke-width: 2px;
-            stroke-linecap: round;
-            stroke-linejoin: round;
+            stroke-width: 2.5px;
         }
 
+        /* 彈窗 */
         #modal-overlay {
-            background: rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(8px);
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
             display: none;
             position: fixed;
             inset: 0;
@@ -102,49 +85,46 @@
             justify-content: center;
         }
 
-        @media (min-width: 768px) {
-            #modal-overlay { align-items: center; }
-        }
+        @media (min-width: 768px) { #modal-overlay { align-items: center; } }
 
         .modal-card {
             background: var(--muji-paper);
             width: 100%;
             max-width: 500px;
-            border-radius: 24px 24px 0 0;
+            border-radius: 30px 30px 0 0;
             overflow: hidden;
-            max-height: 92vh;
+            max-height: 90vh;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 -10px 40px rgba(0,0,0,0.2);
+            box-shadow: 0 -10px 50px rgba(0,0,0,0.3);
         }
 
-        @media (min-width: 768px) {
-            .modal-card { border-radius: 20px; }
-        }
+        @media (min-width: 768px) { .modal-card { border-radius: 24px; } }
 
         .modal-banner {
-            height: 200px;
+            height: 240px;
             width: 100%;
             background-size: cover;
             background-position: center;
             position: relative;
+            transition: background-image 0.4s ease;
         }
 
         .modal-banner::after {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(to bottom, transparent 30%, rgba(255,255,255,1));
+            background: linear-gradient(to bottom, transparent 40%, rgba(255,255,255,1));
         }
 
         .muji-btn {
-            border: 2px solid #E0E0E0;
-            padding: 14px 16px;
-            font-size: 15px; /* 放大按鈕文字 */
-            border-radius: 14px;
+            border: 2px solid #EAEAEA;
+            padding: 14px;
+            font-size: 14px;
+            border-radius: 16px;
             transition: all 0.2s;
-            color: #555;
-            font-weight: 700;
+            color: #666;
+            font-weight: 800;
         }
 
         .muji-btn.active {
@@ -153,55 +133,64 @@
             border-color: #1A1A1A;
         }
 
+        .specialty-tag {
+            display: inline-flex;
+            align-items: center;
+            background: #F8F8F8;
+            padding: 6px 12px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 700;
+            color: #555;
+            border: 1px solid #EEE;
+        }
+
         .watermark-text {
             position: absolute;
-            right: 0;
-            bottom: 40px;
-            font-size: 90px;
+            right: -10px;
+            bottom: 20px;
+            font-size: 80px;
             font-weight: 900;
-            color: rgba(0,0,0,0.04);
+            color: rgba(0,0,0,0.03);
             pointer-events: none;
-            transform: rotate(-3deg);
+            transform: rotate(-5deg);
+            white-space: nowrap;
         }
     </style>
 </head>
 <body class="pb-10">
 
-    <header class="pt-8 pb-4 px-6">
-        <h1 class="serif text-3xl tracking-[0.4em] text-center text-gray-900 mb-6">JAPAHOLIC</h1>
+    <header class="pt-10 pb-6 px-6">
+        <h1 class="serif text-4xl tracking-[0.3em] text-center text-gray-900 mb-8">JAPAHOLIC</h1>
         
         <div class="progress-container">
             <div class="flex justify-between items-end mb-3">
-                <p id="achievement-title" class="text-xs font-black text-gray-800 tracking-wider uppercase">Exploring Japan</p>
-                <p id="progress-count" class="text-xs font-black text-gray-900">0 / 47</p>
+                <p id="achievement-title" class="text-[11px] font-black text-gray-800 tracking-[0.2em] uppercase">Japan Explorer</p>
+                <p id="progress-count" class="text-sm font-black text-gray-900">0 / 47</p>
             </div>
             <div class="progress-track">
                 <div id="progress-fill" class="progress-fill"></div>
             </div>
-            <p id="total-visits" class="text-[10px] font-bold text-gray-500 tracking-widest mt-2 text-right">TOTAL: 0 VISITS</p>
+            <p id="total-visits" class="text-[10px] font-bold text-gray-400 tracking-widest mt-3 text-right">TOTAL RECORD: 0 VISITS</p>
         </div>
     </header>
 
     <main class="max-w-[700px] mx-auto px-4">
-        <!-- 地圖區域 -->
-        <div class="relative bg-white/50 rounded-3xl p-2 shadow-inner">
+        <div class="relative bg-white/40 rounded-[40px] p-2 shadow-inner overflow-hidden">
             <svg viewBox="0 0 650 620" class="w-full h-auto" xmlns="http://www.w3.org/2000/svg">
-                <!-- 北海道 -->
-                <g>
-                    <path id="hokkaido" data-name="北海道" class="pref-path" d="M420,20 L600,20 L600,100 L530,100 L530,140 L450,140 L450,100 L420,100 Z" />
-                    <text x="510" y="75" class="label-text">北海道</text>
-                </g>
-                <!-- 東北 -->
-                <g>
+                <!-- 地圖 SVG 路徑 (與前版相同但確保完整性) -->
+                <!-- 簡化呈現以便檔案生成，包含主要區域 -->
+                <g id="map-group">
+                    <!-- 北海道 -->
+                    <path id="hokkaido" data-name="北海道" class="pref-path" d="M420,20 L600,20 L600,100 L530,100 L530,140 L450,140 L450,100 L420,100 Z" /><text x="510" y="75" class="label-text">北海道</text>
+                    <!-- 東北 -->
                     <path id="aomori" data-name="青森" class="pref-path" d="M430,150 L490,150 L490,190 L430,190 Z" /><text x="460" y="175" class="label-text">青森</text>
                     <path id="akita" data-name="秋田" class="pref-path" d="M430,190 L460,190 L460,250 L430,250 Z" /><text x="445" y="225" class="label-text">秋田</text>
                     <path id="iwate" data-name="岩手" class="pref-path" d="M460,190 L490,190 L490,250 L460,250 Z" /><text x="475" y="225" class="label-text">岩手</text>
                     <path id="yamagata" data-name="山形" class="pref-path" d="M430,250 L460,250 L460,290 L430,290 Z" /><text x="445" y="275" class="label-text">山形</text>
                     <path id="miyagi" data-name="宮城" class="pref-path" d="M460,250 L490,250 L490,290 L460,290 Z" /><text x="475" y="275" class="label-text">宮城</text>
                     <path id="fukushima" data-name="福島" class="pref-path" d="M430,290 L490,290 L490,330 L430,330 Z" /><text x="460" y="315" class="label-text">福島</text>
-                </g>
-                <!-- 關東 -->
-                <g>
+                    <!-- 關東 -->
                     <path id="ibaraki" data-name="茨城" class="pref-path" d="M490,330 L520,330 L520,390 L490,390 Z" /><text x="505" y="365" class="label-text">茨城</text>
                     <path id="tochigi" data-name="栃木" class="pref-path" d="M460,330 L490,330 L490,365 L460,365 Z" /><text x="475" y="352" class="label-text">栃木</text>
                     <path id="gunma" data-name="群馬" class="pref-path" d="M430,330 L460,330 L460,365 L430,365 Z" /><text x="445" y="352" class="label-text">群馬</text>
@@ -209,9 +198,7 @@
                     <path id="chiba" data-name="千葉" class="pref-path" d="M490,395 L520,395 L520,455 L490,455 Z" /><text x="505" y="430" class="label-text">千葉</text>
                     <path id="tokyo" data-name="東京" class="pref-path" d="M445,395 L490,395 L490,425 L445,425 Z" /><text x="467" y="415" class="label-text">東京</text>
                     <path id="kanagawa" data-name="神奈川" class="pref-path" d="M445,425 L490,425 L490,455 L445,455 Z" /><text x="467" y="445" class="label-text">神奈川</text>
-                </g>
-                <!-- 中部 -->
-                <g>
+                    <!-- 中部 -->
                     <path id="niigata" data-name="新潟" class="pref-path" d="M390,280 L430,280 L430,330 L390,320 Z" /><text x="410" y="305" class="label-text">新潟</text>
                     <path id="toyama" data-name="富山" class="pref-path" d="M365,320 L390,320 L390,355 L365,355 Z" /><text x="377" y="342" class="label-text">富山</text>
                     <path id="ishikawa" data-name="石川" class="pref-path" d="M345,320 L365,320 L365,375 L345,375 Z" /><text x="355" y="350" class="label-text">石川</text>
@@ -221,9 +208,7 @@
                     <path id="gifu" data-name="岐阜" class="pref-path" d="M345,355 L390,355 L390,425 L345,425 Z" /><text x="367" y="395" class="label-text">岐阜</text>
                     <path id="shizuoka" data-name="靜岡" class="pref-path" d="M390,425 L445,425 L445,455 L390,455 Z" /><text x="417" y="445" class="label-text">靜岡</text>
                     <path id="aichi" data-name="愛知" class="pref-path" d="M345,425 L390,425 L390,455 L345,455 Z" /><text x="367" y="445" class="label-text">愛知</text>
-                </g>
-                <!-- 近畿 -->
-                <g>
+                    <!-- 近畿 -->
                     <path id="shiga" data-name="滋賀" class="pref-path" d="M320,395 L345,395 L345,425 L320,425 Z" /><text x="332" y="415" class="label-text">滋賀</text>
                     <path id="mie" data-name="三重" class="pref-path" d="M320,425 L345,425 L345,485 L320,485 Z" /><text x="332" y="460" class="label-text">三重</text>
                     <path id="kyoto" data-name="京都" class="pref-path" d="M285,375 L320,375 L320,425 L285,425 Z" /><text x="302" y="405" class="label-text">京都</text>
@@ -231,9 +216,7 @@
                     <path id="hyogo" data-name="兵庫" class="pref-path" d="M245,375 L285,375 L285,455 L245,455 Z" /><text x="265" y="420" class="label-text">兵庫</text>
                     <path id="nara" data-name="奈良" class="pref-path" d="M305,425 L320,425 L320,470 L305,470 Z" /><text x="312" y="452" class="label-text">奈良</text>
                     <path id="wakayama" data-name="和歌山" class="pref-path" d="M285,455 L320,455 L320,485 L285,485 Z" /><text x="302" y="475" class="label-text">和歌山</text>
-                </g>
-                <!-- 中國/四國 (修正高知) -->
-                <g>
+                    <!-- 中國/四國 -->
                     <path id="tottori" data-name="鳥取" class="pref-path" d="M205,375 L245,375 L245,405 L205,405 Z" /><text x="225" y="395" class="label-text">鳥取</text>
                     <path id="shimane" data-name="島根" class="pref-path" d="M155,375 L205,375 L205,405 L155,405 Z" /><text x="180" y="395" class="label-text">島根</text>
                     <path id="okayama" data-name="岡山" class="pref-path" d="M205,405 L245,405 L245,435 L205,435 Z" /><text x="225" y="425" class="label-text">岡山</text>
@@ -242,11 +225,8 @@
                     <path id="kagawa" data-name="香川" class="pref-path" d="M205,445 L245,445 L245,470 L205,470 Z" /><text x="225" y="462" class="label-text">香川</text>
                     <path id="ehime" data-name="愛媛" class="pref-path" d="M155,445 L205,445 L205,470 L155,470 Z" /><text x="180" y="462" class="label-text">愛媛</text>
                     <path id="tokushima" data-name="德島" class="pref-path" d="M205,470 L245,470 L245,495 L205,495 Z" /><text x="225" y="487" class="label-text">德島</text>
-                    <!-- 修正高知 path -->
                     <path id="kochi" data-name="高知" class="pref-path" d="M155,470 L205,470 L205,495 L155,495 Z" /><text x="180" y="487" class="label-text">高知</text>
-                </g>
-                <!-- 九州/沖繩 -->
-                <g>
+                    <!-- 九州/沖繩 -->
                     <path id="fukuoka" data-name="福岡" class="pref-path" d="M75,445 L110,445 L110,480 L75,480 Z" /><text x="92" y="467" class="label-text">福岡</text>
                     <path id="saga" data-name="佐賀" class="pref-path" d="M45,455 L75,455 L75,485 L45,485 Z" /><text x="60" y="475" class="label-text">佐賀</text>
                     <path id="nagasaki" data-name="長崎" class="pref-path" d="M20,445 L45,445 L45,495 L20,495 Z" /><text x="32" y="475" class="label-text">長崎</text>
@@ -260,61 +240,108 @@
         </div>
     </main>
 
-    <!-- 彈窗 -->
+    <!-- 彈窗內容 -->
     <div id="modal-overlay">
         <div class="modal-card">
-            <div id="modal-banner" class="modal-banner" style="background-image: url('https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&q=80&w=800');"></div>
+            <div id="modal-banner" class="modal-banner"></div>
 
-            <div class="p-6 md:p-8 relative">
+            <div class="p-8 relative">
                 <div id="watermark" class="watermark-text uppercase">TOKYO</div>
 
                 <div class="flex justify-between items-start mb-6 relative z-10">
                     <div>
-                        <h2 id="modal-title" class="serif text-4xl text-gray-900 leading-none">縣市名稱</h2>
-                        <p id="modal-subtitle" class="text-xs text-gray-800 font-black tracking-widest uppercase mt-3">Prefecture</p>
+                        <div class="flex items-center gap-3 mb-2">
+                            <h2 id="modal-title" class="serif text-4xl text-gray-900 leading-none">縣市</h2>
+                            <div id="specialty-tag" class="specialty-tag">
+                                <span id="specialty-icon" class="mr-2">📍</span>
+                                <span id="specialty-text">特色描述</span>
+                            </div>
+                        </div>
+                        <p id="modal-subtitle" class="text-xs text-gray-400 font-black tracking-widest uppercase">Prefecture</p>
                     </div>
                     <span id="visit-count-badge" class="bg-gray-900 text-white text-[11px] px-3 py-2 rounded-lg font-bold">0 VISITS</span>
                 </div>
                 
-                <div class="flex gap-3 mb-8 relative z-10">
+                <!-- 狀態按鈕 -->
+                <div class="flex gap-2 mb-8 relative z-10">
                     <button onclick="setStatus('none')" id="btn-none" class="muji-btn flex-1">未造訪</button>
                     <button onclick="setStatus('planning')" id="btn-planning" class="muji-btn flex-1">計畫中</button>
                     <button onclick="setStatus('visited')" id="btn-visited" class="muji-btn flex-1">已造訪</button>
                 </div>
 
+                <!-- 紀錄區塊 -->
                 <div id="visited-section" class="hidden relative z-10">
                     <div class="bg-gray-50 p-5 rounded-2xl border-2 border-gray-100 mb-6">
                         <div class="space-y-4">
-                            <input type="date" id="visit-date" class="w-full bg-white border-2 border-gray-200 rounded-xl px-4 py-3 text-base font-bold focus:border-black transition-all outline-none">
-                            <textarea id="visit-note" placeholder="寫下旅遊心得..." class="w-full bg-white border-2 border-gray-200 rounded-xl px-4 py-3 text-base h-24 resize-none focus:border-black transition-all outline-none"></textarea>
-                            <button id="add-record-btn" class="w-full py-4 bg-gray-900 text-white text-sm font-black rounded-xl hover:bg-black active:scale-[0.97] transition-all">儲存這趟旅程</button>
+                            <input type="date" id="visit-date" class="w-full bg-white border-2 border-gray-100 rounded-xl px-4 py-3 text-base font-bold focus:border-black transition-all outline-none">
+                            <textarea id="visit-note" placeholder="寫下對這裏的印象..." class="w-full bg-white border-2 border-gray-100 rounded-xl px-4 py-3 text-base h-24 resize-none focus:border-black transition-all outline-none"></textarea>
+                            <button id="add-record-btn" class="w-full py-4 bg-gray-900 text-white text-sm font-black rounded-xl hover:bg-black transition-all">儲存旅程</button>
                         </div>
                     </div>
-                    <div id="records-list" class="max-h-52 overflow-y-auto space-y-2 mb-4 pr-1"></div>
+                    <div id="records-list" class="max-h-40 overflow-y-auto space-y-2 mb-4"></div>
                 </div>
 
-                <button id="modal-close" class="w-full py-4 text-sm font-black text-gray-400 hover:text-gray-900 transition-colors">關閉地圖</button>
+                <button id="modal-close" class="w-full py-4 text-sm font-black text-gray-400 hover:text-gray-900 transition-colors uppercase tracking-widest">Close Map</button>
             </div>
         </div>
     </div>
 
     <script>
-        const STORAGE_KEY = 'japaholic_v3_data';
-        let userData = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
-        let currentId = null;
-
-        const PREF_MAP = {
-            hokkaido: { eng: 'Hokkaido', img: 'https://images.unsplash.com/photo-1576675466684-457390da2563?auto=format&fit=crop&q=80&w=800' },
-            aomori: { eng: 'Aomori', img: 'https://images.unsplash.com/photo-1543339308-43e59d6b73a6?auto=format&fit=crop&q=80&w=800' },
-            tokyo: { eng: 'Tokyo', img: 'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&q=80&w=800' },
-            kyoto: { eng: 'Kyoto', img: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&q=80&w=800' },
-            osaka: { eng: 'Osaka', img: 'https://images.unsplash.com/photo-1590559899731-a382839e5549?auto=format&fit=crop&q=80&w=800' },
-            okinawa: { eng: 'Okinawa', img: 'https://images.unsplash.com/photo-1534067783941-51c9c23ecefd?auto=format&fit=crop&q=80&w=800' },
-            shizuoka: { eng: 'Shizuoka', img: 'https://images.unsplash.com/photo-1490806678282-484c3765e17a?auto=format&fit=crop&q=80&w=800' },
-            kochi: { eng: 'Kochi', img: 'https://images.unsplash.com/photo-1610427845722-671891516e87?auto=format&fit=crop&q=80&w=800' }
+        // 47 縣市特色資料庫
+        const PREF_DB = {
+            hokkaido: { eng: 'Hokkaido', icon: '❄️', text: '大地、牛奶與雪', img: 'https://images.unsplash.com/photo-1576675466684-457390da2563?q=80&w=800' },
+            aomori: { eng: 'Aomori', icon: '🍎', text: '蘋果與睡魔祭', img: 'https://images.unsplash.com/photo-1543339308-43e59d6b73a6?q=80&w=800' },
+            iwate: { eng: 'Iwate', icon: '🍜', text: '小碗蕎麥麵', img: 'https://images.unsplash.com/photo-1621252431533-6893663a825e?q=80&w=800' },
+            miyagi: { eng: 'Miyagi', icon: '🍢', text: '牛舌與松島', img: 'https://images.unsplash.com/photo-1614749666989-60be78be6c5c?q=80&w=800' },
+            akita: { eng: 'Akita', icon: '🐕', text: '秋田犬之鄉', img: 'https://images.unsplash.com/photo-1582736416937-25916057883e?q=80&w=800' },
+            yamagata: { eng: 'Yamagata', icon: '🍒', text: '銀山溫泉與櫻桃', img: 'https://images.unsplash.com/photo-1528360983277-13d401cdc186?q=80&w=800' },
+            fukushima: { eng: 'Fukushima', icon: '🍑', text: '大內宿與水蜜桃', img: 'https://images.unsplash.com/photo-1570533519159-43c3d5268f76?q=80&w=800' },
+            ibaraki: { eng: 'Ibaraki', icon: '🌸', text: '常陸海濱公園', img: 'https://images.unsplash.com/photo-1524330635446-993eb176707a?q=80&w=800' },
+            tochigi: { eng: 'Tochigi', icon: '🍓', text: '日光東照宮與草莓', img: 'https://images.unsplash.com/photo-1624285038317-0639d675681c?q=80&w=800' },
+            gunma: { eng: 'Gunma', icon: '♨️', text: '草津溫泉', img: 'https://images.unsplash.com/photo-1590457313835-09559e35824c?q=80&w=800' },
+            saitama: { eng: 'Saitama', icon: '🏮', text: '川越小江戶', img: 'https://images.unsplash.com/photo-1563297122-e42154563a6e?q=80&w=800' },
+            chiba: { eng: 'Chiba', icon: '🏰', text: '迪士尼與成田', img: 'https://images.unsplash.com/photo-1624446555198-6395e8656fbe?q=80&w=800' },
+            tokyo: { eng: 'Tokyo', icon: '🗼', text: '都會地標與流行', img: 'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?q=80&w=800' },
+            kanagawa: { eng: 'Kanagawa', icon: '🌊', text: '橫濱與鐮倉大佛', img: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=800' },
+            niigata: { eng: 'Niigata', icon: '🌾', text: '越光米與清酒', img: 'https://images.unsplash.com/photo-1550508587-f823901b8764?q=80&w=800' },
+            toyama: { eng: 'Toyama', icon: '⛰️', text: '立山黑部雪牆', img: 'https://images.unsplash.com/photo-1534067783941-51c9c23ecefd?q=80&w=800' },
+            ishikawa: { eng: 'Ishikawa', icon: '✨', text: '兼六園與金箔', img: 'https://images.unsplash.com/photo-1528164344705-47542687990d?q=80&w=800' },
+            fukui: { eng: 'Fukui', icon: '🦖', text: '恐龍博物館', img: 'https://images.unsplash.com/photo-1523438097204-5753f7936181?q=80&w=800' },
+            yamanashi: { eng: 'Yamanashi', icon: '🗻', text: '富士五湖與葡萄', img: 'https://images.unsplash.com/photo-1490806678282-484c3765e17a?q=80&w=800' },
+            nagano: { eng: 'Nagano', icon: '🐒', text: '地獄谷猴子溫泉', img: 'https://images.unsplash.com/photo-1480796005447-30aa323c4cb3?q=80&w=800' },
+            gifu: { eng: 'Gifu', icon: '🏠', text: '合掌造白川鄉', img: 'https://images.unsplash.com/photo-1533611847154-18c7e6e5872a?q=80&w=800' },
+            shizuoka: { eng: 'Shizuoka', icon: '🍵', text: '富士山與綠茶', img: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?q=80&w=800' },
+            aichi: { eng: 'Aichi', icon: '🚗', text: '名古屋城與味噌', img: 'https://images.unsplash.com/photo-1548048026-5a1a941d93d3?q=80&w=800' },
+            mie: { eng: 'Mie', icon: '⛩️', text: '伊勢神宮與龍蝦', img: 'https://images.unsplash.com/photo-1628189870817-21759607f909?q=80&w=800' },
+            shiga: { eng: 'Shiga', icon: '🛶', text: '琵琶湖與近江牛', img: 'https://images.unsplash.com/photo-1530908293208-410a6237894a?q=80&w=800' },
+            kyoto: { eng: 'Kyoto', icon: '🎋', text: '清水寺與金閣寺', img: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?q=80&w=800' },
+            osaka: { eng: 'Osaka', icon: '🐙', text: '心齋橋與章魚燒', img: 'https://images.unsplash.com/photo-1590559899731-a382839e5549?q=80&w=800' },
+            hyogo: { eng: 'Hyogo', icon: '🏯', text: '姬路城與神戶牛', img: 'https://images.unsplash.com/photo-1590632263433-28f0914101cc?q=80&w=800' },
+            nara: { eng: 'Nara', icon: '🦌', text: '奈良公園的小鹿', img: 'https://images.unsplash.com/photo-1549144464-07e1136b3346?q=80&w=800' },
+            wakayama: { eng: 'Wakayama', icon: '⛩️', text: '那智瀑布與熊野', img: 'https://images.unsplash.com/photo-1626015024769-173873998656?q=80&w=800' },
+            tottori: { eng: 'Tottori', icon: '🐪', text: '鳥取砂丘', img: 'https://images.unsplash.com/photo-1542157585-ef20bcc4f48d?q=80&w=800' },
+            shimane: { eng: 'Shimane', icon: '🌅', text: '出雲大社與緣分', img: 'https://images.unsplash.com/photo-1621252179027-94459d278660?q=80&w=800' },
+            okayama: { eng: 'Okayama', icon: '🍑', text: '桃太郎與後樂園', img: 'https://images.unsplash.com/photo-1596464716127-f2a82984de30?q=80&w=800' },
+            hiroshima: { eng: 'Hiroshima', icon: '⛩️', text: '嚴島神社大鳥居', img: 'https://images.unsplash.com/photo-1549392557-046679545f44?q=80&w=800' },
+            yamaguchi: { eng: 'Yamaguchi', icon: '🐡', text: '錦帶橋與河豚', img: 'https://images.unsplash.com/photo-1599388144800-9831c0e3592f?q=80&w=800' },
+            tokushima: { eng: 'Tokushima', icon: '💃', text: '鳴門漩渦與阿波舞', img: 'https://images.unsplash.com/photo-1605649441113-17b9b1875d31?q=80&w=800' },
+            kagawa: { eng: 'Kagawa', icon: '🍜', text: '讚岐烏龍麵之鄉', img: 'https://images.unsplash.com/photo-1604514813560-1e4f5726db65?q=80&w=800' },
+            ehime: { eng: 'Ehime', icon: '🍊', text: '道後溫泉與蜜柑', img: 'https://images.unsplash.com/photo-1610427845722-671891516e87?q=80&w=800' },
+            kochi: { eng: 'Kochi', icon: '🐟', text: '桂濱與炙燒鰹魚', img: 'https://images.unsplash.com/photo-1610427845722-671891516e87?q=80&w=800' },
+            fukuoka: { eng: 'Fukuoka', icon: '🍜', text: '博多拉麵與屋台', img: 'https://images.unsplash.com/photo-1542051841857-5f90071e7989?q=80&w=800' },
+            saga: { eng: 'Saga', icon: '🏺', text: '熱氣球與有田燒', img: 'https://images.unsplash.com/photo-1621252179027-94459d278660?q=80&w=800' },
+            nagasaki: { eng: 'Nagasaki', icon: '🏮', text: '豪斯登堡與夜景', img: 'https://images.unsplash.com/photo-1571408018335-502213e4b786?q=80&w=800' },
+            kumamoto: { eng: 'Kumamoto', icon: '🐻', text: '熊本城與阿蘇山', img: 'https://images.unsplash.com/photo-1543881515-38b438b40810?q=80&w=800' },
+            oita: { eng: 'Oita', icon: '♨️', text: '別府由布院溫泉', img: 'https://images.unsplash.com/photo-1590457313835-09559e35824c?q=80&w=800' },
+            miyazaki: { eng: 'Miyazaki', icon: '🌴', text: '高千穗峽與芒果', img: 'https://images.unsplash.com/photo-1621252179027-94459d278660?q=80&w=800' },
+            kagoshima: { eng: 'Kagoshima', icon: '🌋', text: '櫻島火山與黑豬', img: 'https://images.unsplash.com/photo-1621252179027-94459d278660?q=80&w=800' },
+            okinawa: { eng: 'Okinawa', icon: '🏝️', text: '首里城與沖繩海', img: 'https://images.unsplash.com/photo-1534067783941-51c9c23ecefd?q=80&w=800' }
         };
 
-        function update() {
+        let userData = JSON.parse(localStorage.getItem('japaholic_v4_data') || '{}');
+        let currentId = null;
+
+        function updateUI() {
             let prefCount = 0;
             let totalV = 0;
             document.querySelectorAll('.pref-path').forEach(el => {
@@ -325,8 +352,8 @@
             });
             document.getElementById('progress-fill').style.width = `${(prefCount/47)*100}%`;
             document.getElementById('progress-count').innerText = `${prefCount} / 47`;
-            document.getElementById('total-visits').innerText = `TOTAL: ${totalV} VISITS`;
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(userData));
+            document.getElementById('total-visits').innerText = `TOTAL RECORD: ${totalV} VISITS`;
+            localStorage.setItem('japaholic_v4_data', JSON.stringify(userData));
         }
 
         function setStatus(s) {
@@ -338,7 +365,7 @@
                 if (!userData[currentId]) userData[currentId] = { records: [] };
                 userData[currentId].status = s;
                 if (s === 'none') userData[currentId].records = [];
-                update();
+                updateUI();
             }
         }
 
@@ -346,12 +373,12 @@
             const list = document.getElementById('records-list');
             const data = userData[currentId] || { records: [] };
             document.getElementById('visit-count-badge').innerText = `${data.records.length} VISITS`;
-            list.innerHTML = data.records.length ? '' : '<p class="text-center text-gray-400 py-4 font-bold">尚未加入旅程紀錄</p>';
+            list.innerHTML = data.records.length ? '' : '<p class="text-center text-gray-300 py-6 font-bold text-sm tracking-widest uppercase">No Records Yet</p>';
             [...data.records].reverse().forEach((r, i) => {
                 const div = document.createElement('div');
                 div.className = 'bg-white p-4 rounded-xl border-2 border-gray-100 flex justify-between items-center';
-                div.innerHTML = `<div><p class="font-black text-gray-900">${r.date}</p><p class="text-sm text-gray-500 font-bold">${r.note || ''}</p></div>
-                <button onclick="delRec(${data.records.length - 1 - i})" class="text-xs font-black text-gray-300 hover:text-red-500">刪除</button>`;
+                div.innerHTML = `<div><p class="font-black text-gray-900">${r.date}</p><p class="text-xs text-gray-400 font-bold">${r.note || ''}</p></div>
+                <button onclick="delRec(${data.records.length - 1 - i})" class="text-[10px] font-black text-gray-300 hover:text-red-500 uppercase tracking-tighter">Delete</button>`;
                 list.appendChild(div);
             });
         }
@@ -359,7 +386,7 @@
         window.delRec = (idx) => {
             userData[currentId].records.splice(idx, 1);
             if (userData[currentId].records.length === 0) { userData[currentId].status = 'none'; setStatus('none'); }
-            renderRecords(); update();
+            renderRecords(); updateUI();
         };
 
         document.getElementById('add-record-btn').onclick = () => {
@@ -371,17 +398,21 @@
             userData[currentId].records.push({ date, note });
             document.getElementById('visit-date').value = '';
             document.getElementById('visit-note').value = '';
-            renderRecords(); update(); setStatus('visited');
+            renderRecords(); updateUI(); setStatus('visited');
         };
 
         document.querySelectorAll('.pref-path').forEach(p => {
             p.onclick = () => {
                 currentId = p.id;
-                const config = PREF_MAP[currentId] || { eng: currentId.toUpperCase(), img: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&q=80&w=800' };
+                const info = PREF_DB[currentId] || { eng: currentId.toUpperCase(), icon: '📍', text: '探索日本的美', img: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?q=80&w=800' };
+                
                 document.getElementById('modal-title').innerText = p.getAttribute('data-name');
-                document.getElementById('modal-subtitle').innerText = config.eng;
-                document.getElementById('watermark').innerText = config.eng;
-                document.getElementById('modal-banner').style.backgroundImage = `url('${config.img}')`;
+                document.getElementById('modal-subtitle').innerText = info.eng;
+                document.getElementById('watermark').innerText = info.eng;
+                document.getElementById('specialty-icon').innerText = info.icon;
+                document.getElementById('specialty-text').innerText = info.text;
+                document.getElementById('modal-banner').style.backgroundImage = `url('${info.img}')`;
+                
                 setStatus(userData[currentId]?.status || 'none');
                 renderRecords();
                 document.getElementById('modal-overlay').style.display = 'flex';
@@ -389,7 +420,7 @@
         });
 
         document.getElementById('modal-close').onclick = () => document.getElementById('modal-overlay').style.display = 'none';
-        update();
+        updateUI();
     </script>
 </body>
 </html>
