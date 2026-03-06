@@ -127,6 +127,20 @@
             border-bottom: 1px solid #f0f0f0;
             padding: 14px 0;
         }
+
+        /* 特色 Icon 容器 */
+        .pref-icon-circle {
+            width: 56px;
+            height: 56px;
+            background: #F9F9F8;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 1rem;
+            border: 1px solid #F0EFED;
+        }
         
         /* 滾動條美化 */
         ::-webkit-scrollbar { width: 4px; }
@@ -238,11 +252,15 @@
         </div>
     </main>
 
-    <!-- 彈窗內容維持原紀錄功能 -->
+    <!-- 彈窗內容 -->
     <div id="modal-overlay">
         <div class="modal-card">
+            <div id="pref-icon-box" class="pref-icon-circle">📍</div>
             <div class="flex justify-between items-center mb-6">
-                <h2 id="modal-title" class="serif text-2xl text-gray-800">縣市名稱</h2>
+                <div>
+                    <h2 id="modal-title" class="serif text-2xl text-gray-800">縣市名稱</h2>
+                    <p id="modal-subtitle" class="text-[10px] text-gray-400 tracking-[0.2em] uppercase mt-1">Prefecture</p>
+                </div>
                 <span id="visit-count-badge" class="bg-gray-100 text-[10px] px-3 py-1 rounded-full text-gray-500 font-medium tracking-tighter">0 次造訪</span>
             </div>
             
@@ -278,6 +296,34 @@
         const STORAGE_KEY = 'japaholic_muji_data_v2';
         let userData = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
         let currentId = null;
+
+        // 特色 Icon 資料庫
+        const PREF_ICONS = {
+            hokkaido: { icon: '❄️', eng: 'Hokkaido' }, aomori: { icon: '🍎', eng: 'Aomori' },
+            iwate: { icon: '🥣', eng: 'Iwate' }, miyagi: { icon: '🎋', eng: 'Miyagi' },
+            akita: { icon: '🐕', eng: 'Akita' }, yamagata: { icon: '🍒', eng: 'Yamagata' },
+            fukushima: { icon: '🍑', eng: 'Fukushima' }, ibaraki: { icon: '🌻', eng: 'Ibaraki' },
+            tochigi: { icon: '🍓', eng: 'Tochigi' }, gunma: { icon: '♨️', eng: 'Gunma' },
+            saitama: { icon: '🏮', eng: 'Saitama' }, chiba: { icon: '🥜', eng: 'Chiba' },
+            tokyo: { icon: '🗼', eng: 'Tokyo' }, kanagawa: { icon: '⚓', eng: 'Kanagawa' },
+            niigata: { icon: '🌾', eng: 'Niigata' }, toyama: { icon: '🏔️', eng: 'Toyama' },
+            ishikawa: { icon: '🍵', eng: 'Ishikawa' }, fukui: { icon: '🦖', eng: 'Fukui' },
+            yamanashi: { icon: '🍇', eng: 'Yamanashi' }, nagano: { icon: '🍎', eng: 'Nagano' },
+            gifu: { icon: '🏠', eng: 'Gifu' }, shizuoka: { icon: '🗻', eng: 'Shizuoka' },
+            aichi: { icon: '🏯', eng: 'Aichi' }, mie: { icon: '⛩️', eng: 'Mie' },
+            shiga: { icon: '🛶', eng: 'Shiga' }, kyoto: { icon: '⛩️', eng: 'Kyoto' },
+            osaka: { icon: '🐙', eng: 'Osaka' }, hyogo: { icon: '🥩', eng: 'Hyogo' },
+            nara: { icon: '🦌', eng: 'Nara' }, wakayama: { icon: '🍊', eng: 'Wakayama' },
+            tottori: { icon: '🏜️', eng: 'Tottori' }, shimane: { icon: '🐇', eng: 'Shimane' },
+            okayama: { icon: '🍑', eng: 'Okayama' }, hiroshima: { icon: '⛩️', eng: 'Hiroshima' },
+            yamaguchi: { icon: '🐡', eng: 'Yamaguchi' }, tokushima: { icon: '🌀', eng: 'Tokushima' },
+            kagawa: { icon: '🍜', eng: 'Kagawa' }, ehime: { icon: '🍊', eng: 'Ehime' },
+            kochi: { icon: '🌊', eng: 'Kochi' }, fukuoka: { icon: '🍜', eng: 'Fukuoka' },
+            saga: { icon: '🏺', eng: 'Saga' }, nagasaki: { icon: '🏮', eng: 'Nagasaki' },
+            kumamoto: { icon: '🐻', eng: 'Kumamoto' }, oita: { icon: '♨️', eng: 'Oita' },
+            miyazaki: { icon: '🌴', eng: 'Miyazaki' }, kagoshima: { icon: '🌋', eng: 'Kagoshima' },
+            okinawa: { icon: '🌺', eng: 'Okinawa' }
+        };
 
         const titles = [
             { min: 47, label: "👑 日本傳說：究極旅人" },
@@ -390,7 +436,12 @@
         function openModal(id) {
             currentId = id;
             const data = userData[id] || { status: 'none', records: [] };
+            const config = PREF_ICONS[id] || { icon: '📍', eng: 'Prefecture' };
+            
             document.getElementById('modal-title').innerText = document.getElementById(id).getAttribute('data-name');
+            document.getElementById('modal-subtitle').innerText = config.eng;
+            document.getElementById('pref-icon-box').innerText = config.icon;
+            
             setStatus(data.status);
             renderRecords();
             document.getElementById('modal-overlay').style.display = 'flex';
