@@ -97,6 +97,7 @@
             display: flex;
             flex-direction: column;
             box-shadow: 0 -10px 50px rgba(0,0,0,0.3);
+            pointer-events: auto; /* 確保內部內容可點擊 */
         }
 
         @media (min-width: 768px) { .modal-card { border-radius: 24px; } }
@@ -178,19 +179,15 @@
     <main class="max-w-[700px] mx-auto px-4">
         <div class="relative bg-white/40 rounded-[40px] p-2 shadow-inner overflow-hidden">
             <svg viewBox="0 0 650 620" class="w-full h-auto" xmlns="http://www.w3.org/2000/svg">
-                <!-- 地圖 SVG 路徑 (與前版相同但確保完整性) -->
-                <!-- 簡化呈現以便檔案生成，包含主要區域 -->
                 <g id="map-group">
-                    <!-- 北海道 -->
+                    <!-- 北海道及其他各縣路徑 (同上) -->
                     <path id="hokkaido" data-name="北海道" class="pref-path" d="M420,20 L600,20 L600,100 L530,100 L530,140 L450,140 L450,100 L420,100 Z" /><text x="510" y="75" class="label-text">北海道</text>
-                    <!-- 東北 -->
                     <path id="aomori" data-name="青森" class="pref-path" d="M430,150 L490,150 L490,190 L430,190 Z" /><text x="460" y="175" class="label-text">青森</text>
                     <path id="akita" data-name="秋田" class="pref-path" d="M430,190 L460,190 L460,250 L430,250 Z" /><text x="445" y="225" class="label-text">秋田</text>
                     <path id="iwate" data-name="岩手" class="pref-path" d="M460,190 L490,190 L490,250 L460,250 Z" /><text x="475" y="225" class="label-text">岩手</text>
                     <path id="yamagata" data-name="山形" class="pref-path" d="M430,250 L460,250 L460,290 L430,290 Z" /><text x="445" y="275" class="label-text">山形</text>
                     <path id="miyagi" data-name="宮城" class="pref-path" d="M460,250 L490,250 L490,290 L460,290 Z" /><text x="475" y="275" class="label-text">宮城</text>
                     <path id="fukushima" data-name="福島" class="pref-path" d="M430,290 L490,290 L490,330 L430,330 Z" /><text x="460" y="315" class="label-text">福島</text>
-                    <!-- 關東 -->
                     <path id="ibaraki" data-name="茨城" class="pref-path" d="M490,330 L520,330 L520,390 L490,390 Z" /><text x="505" y="365" class="label-text">茨城</text>
                     <path id="tochigi" data-name="栃木" class="pref-path" d="M460,330 L490,330 L490,365 L460,365 Z" /><text x="475" y="352" class="label-text">栃木</text>
                     <path id="gunma" data-name="群馬" class="pref-path" d="M430,330 L460,330 L460,365 L430,365 Z" /><text x="445" y="352" class="label-text">群馬</text>
@@ -198,7 +195,6 @@
                     <path id="chiba" data-name="千葉" class="pref-path" d="M490,395 L520,395 L520,455 L490,455 Z" /><text x="505" y="430" class="label-text">千葉</text>
                     <path id="tokyo" data-name="東京" class="pref-path" d="M445,395 L490,395 L490,425 L445,425 Z" /><text x="467" y="415" class="label-text">東京</text>
                     <path id="kanagawa" data-name="神奈川" class="pref-path" d="M445,425 L490,425 L490,455 L445,455 Z" /><text x="467" y="445" class="label-text">神奈川</text>
-                    <!-- 中部 -->
                     <path id="niigata" data-name="新潟" class="pref-path" d="M390,280 L430,280 L430,330 L390,320 Z" /><text x="410" y="305" class="label-text">新潟</text>
                     <path id="toyama" data-name="富山" class="pref-path" d="M365,320 L390,320 L390,355 L365,355 Z" /><text x="377" y="342" class="label-text">富山</text>
                     <path id="ishikawa" data-name="石川" class="pref-path" d="M345,320 L365,320 L365,375 L345,375 Z" /><text x="355" y="350" class="label-text">石川</text>
@@ -208,7 +204,6 @@
                     <path id="gifu" data-name="岐阜" class="pref-path" d="M345,355 L390,355 L390,425 L345,425 Z" /><text x="367" y="395" class="label-text">岐阜</text>
                     <path id="shizuoka" data-name="靜岡" class="pref-path" d="M390,425 L445,425 L445,455 L390,455 Z" /><text x="417" y="445" class="label-text">靜岡</text>
                     <path id="aichi" data-name="愛知" class="pref-path" d="M345,425 L390,425 L390,455 L345,455 Z" /><text x="367" y="445" class="label-text">愛知</text>
-                    <!-- 近畿 -->
                     <path id="shiga" data-name="滋賀" class="pref-path" d="M320,395 L345,395 L345,425 L320,425 Z" /><text x="332" y="415" class="label-text">滋賀</text>
                     <path id="mie" data-name="三重" class="pref-path" d="M320,425 L345,425 L345,485 L320,485 Z" /><text x="332" y="460" class="label-text">三重</text>
                     <path id="kyoto" data-name="京都" class="pref-path" d="M285,375 L320,375 L320,425 L285,425 Z" /><text x="302" y="405" class="label-text">京都</text>
@@ -216,7 +211,6 @@
                     <path id="hyogo" data-name="兵庫" class="pref-path" d="M245,375 L285,375 L285,455 L245,455 Z" /><text x="265" y="420" class="label-text">兵庫</text>
                     <path id="nara" data-name="奈良" class="pref-path" d="M305,425 L320,425 L320,470 L305,470 Z" /><text x="312" y="452" class="label-text">奈良</text>
                     <path id="wakayama" data-name="和歌山" class="pref-path" d="M285,455 L320,455 L320,485 L285,485 Z" /><text x="302" y="475" class="label-text">和歌山</text>
-                    <!-- 中國/四國 -->
                     <path id="tottori" data-name="鳥取" class="pref-path" d="M205,375 L245,375 L245,405 L205,405 Z" /><text x="225" y="395" class="label-text">鳥取</text>
                     <path id="shimane" data-name="島根" class="pref-path" d="M155,375 L205,375 L205,405 L155,405 Z" /><text x="180" y="395" class="label-text">島根</text>
                     <path id="okayama" data-name="岡山" class="pref-path" d="M205,405 L245,405 L245,435 L205,435 Z" /><text x="225" y="425" class="label-text">岡山</text>
@@ -226,7 +220,6 @@
                     <path id="ehime" data-name="愛媛" class="pref-path" d="M155,445 L205,445 L205,470 L155,470 Z" /><text x="180" y="462" class="label-text">愛媛</text>
                     <path id="tokushima" data-name="德島" class="pref-path" d="M205,470 L245,470 L245,495 L205,495 Z" /><text x="225" y="487" class="label-text">德島</text>
                     <path id="kochi" data-name="高知" class="pref-path" d="M155,470 L205,470 L205,495 L155,495 Z" /><text x="180" y="487" class="label-text">高知</text>
-                    <!-- 九州/沖繩 -->
                     <path id="fukuoka" data-name="福岡" class="pref-path" d="M75,445 L110,445 L110,480 L75,480 Z" /><text x="92" y="467" class="label-text">福岡</text>
                     <path id="saga" data-name="佐賀" class="pref-path" d="M45,455 L75,455 L75,485 L45,485 Z" /><text x="60" y="475" class="label-text">佐賀</text>
                     <path id="nagasaki" data-name="長崎" class="pref-path" d="M20,445 L45,445 L45,495 L20,495 Z" /><text x="32" y="475" class="label-text">長崎</text>
@@ -241,8 +234,8 @@
     </main>
 
     <!-- 彈窗內容 -->
-    <div id="modal-overlay">
-        <div class="modal-card">
+    <div id="modal-overlay" onclick="closeModal()">
+        <div class="modal-card" onclick="event.stopPropagation()">
             <div id="modal-banner" class="modal-banner"></div>
 
             <div class="p-8 relative">
@@ -281,61 +274,60 @@
                     <div id="records-list" class="max-h-40 overflow-y-auto space-y-2 mb-4"></div>
                 </div>
 
-                <button id="modal-close" class="w-full py-4 text-sm font-black text-gray-400 hover:text-gray-900 transition-colors uppercase tracking-widest">Close Map</button>
+                <button id="modal-close" onclick="closeModal()" class="w-full py-4 text-sm font-black text-gray-400 hover:text-gray-900 transition-colors uppercase tracking-widest">Close Map</button>
             </div>
         </div>
     </div>
 
     <script>
-        // 47 縣市特色資料庫
         const PREF_DB = {
-            hokkaido: { eng: 'Hokkaido', icon: '❄️', text: '大地、牛奶與雪', img: 'https://images.unsplash.com/photo-1576675466684-457390da2563?q=80&w=800' },
-            aomori: { eng: 'Aomori', icon: '🍎', text: '蘋果與睡魔祭', img: 'https://images.unsplash.com/photo-1543339308-43e59d6b73a6?q=80&w=800' },
-            iwate: { eng: 'Iwate', icon: '🍜', text: '小碗蕎麥麵', img: 'https://images.unsplash.com/photo-1621252431533-6893663a825e?q=80&w=800' },
-            miyagi: { eng: 'Miyagi', icon: '🍢', text: '牛舌與松島', img: 'https://images.unsplash.com/photo-1614749666989-60be78be6c5c?q=80&w=800' },
-            akita: { eng: 'Akita', icon: '🐕', text: '秋田犬之鄉', img: 'https://images.unsplash.com/photo-1582736416937-25916057883e?q=80&w=800' },
-            yamagata: { eng: 'Yamagata', icon: '🍒', text: '銀山溫泉與櫻桃', img: 'https://images.unsplash.com/photo-1528360983277-13d401cdc186?q=80&w=800' },
-            fukushima: { eng: 'Fukushima', icon: '🍑', text: '大內宿與水蜜桃', img: 'https://images.unsplash.com/photo-1570533519159-43c3d5268f76?q=80&w=800' },
-            ibaraki: { eng: 'Ibaraki', icon: '🌸', text: '常陸海濱公園', img: 'https://images.unsplash.com/photo-1524330635446-993eb176707a?q=80&w=800' },
-            tochigi: { eng: 'Tochigi', icon: '🍓', text: '日光東照宮與草莓', img: 'https://images.unsplash.com/photo-1624285038317-0639d675681c?q=80&w=800' },
-            gunma: { eng: 'Gunma', icon: '♨️', text: '草津溫泉', img: 'https://images.unsplash.com/photo-1590457313835-09559e35824c?q=80&w=800' },
-            saitama: { eng: 'Saitama', icon: '🏮', text: '川越小江戶', img: 'https://images.unsplash.com/photo-1563297122-e42154563a6e?q=80&w=800' },
-            chiba: { eng: 'Chiba', icon: '🏰', text: '迪士尼與成田', img: 'https://images.unsplash.com/photo-1624446555198-6395e8656fbe?q=80&w=800' },
-            tokyo: { eng: 'Tokyo', icon: '🗼', text: '都會地標與流行', img: 'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?q=80&w=800' },
-            kanagawa: { eng: 'Kanagawa', icon: '🌊', text: '橫濱與鐮倉大佛', img: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=800' },
-            niigata: { eng: 'Niigata', icon: '🌾', text: '越光米與清酒', img: 'https://images.unsplash.com/photo-1550508587-f823901b8764?q=80&w=800' },
-            toyama: { eng: 'Toyama', icon: '⛰️', text: '立山黑部雪牆', img: 'https://images.unsplash.com/photo-1534067783941-51c9c23ecefd?q=80&w=800' },
-            ishikawa: { eng: 'Ishikawa', icon: '✨', text: '兼六園與金箔', img: 'https://images.unsplash.com/photo-1528164344705-47542687990d?q=80&w=800' },
-            fukui: { eng: 'Fukui', icon: '🦖', text: '恐龍博物館', img: 'https://images.unsplash.com/photo-1523438097204-5753f7936181?q=80&w=800' },
-            yamanashi: { eng: 'Yamanashi', icon: '🗻', text: '富士五湖與葡萄', img: 'https://images.unsplash.com/photo-1490806678282-484c3765e17a?q=80&w=800' },
-            nagano: { eng: 'Nagano', icon: '🐒', text: '地獄谷猴子溫泉', img: 'https://images.unsplash.com/photo-1480796005447-30aa323c4cb3?q=80&w=800' },
-            gifu: { eng: 'Gifu', icon: '🏠', text: '合掌造白川鄉', img: 'https://images.unsplash.com/photo-1533611847154-18c7e6e5872a?q=80&w=800' },
-            shizuoka: { eng: 'Shizuoka', icon: '🍵', text: '富士山與綠茶', img: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?q=80&w=800' },
-            aichi: { eng: 'Aichi', icon: '🚗', text: '名古屋城與味噌', img: 'https://images.unsplash.com/photo-1548048026-5a1a941d93d3?q=80&w=800' },
-            mie: { eng: 'Mie', icon: '⛩️', text: '伊勢神宮與龍蝦', img: 'https://images.unsplash.com/photo-1628189870817-21759607f909?q=80&w=800' },
-            shiga: { eng: 'Shiga', icon: '🛶', text: '琵琶湖與近江牛', img: 'https://images.unsplash.com/photo-1530908293208-410a6237894a?q=80&w=800' },
-            kyoto: { eng: 'Kyoto', icon: '🎋', text: '清水寺與金閣寺', img: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?q=80&w=800' },
-            osaka: { eng: 'Osaka', icon: '🐙', text: '心齋橋與章魚燒', img: 'https://images.unsplash.com/photo-1590559899731-a382839e5549?q=80&w=800' },
-            hyogo: { eng: 'Hyogo', icon: '🏯', text: '姬路城與神戶牛', img: 'https://images.unsplash.com/photo-1590632263433-28f0914101cc?q=80&w=800' },
-            nara: { eng: 'Nara', icon: '🦌', text: '奈良公園的小鹿', img: 'https://images.unsplash.com/photo-1549144464-07e1136b3346?q=80&w=800' },
-            wakayama: { eng: 'Wakayama', icon: '⛩️', text: '那智瀑布與熊野', img: 'https://images.unsplash.com/photo-1626015024769-173873998656?q=80&w=800' },
-            tottori: { eng: 'Tottori', icon: '🐪', text: '鳥取砂丘', img: 'https://images.unsplash.com/photo-1542157585-ef20bcc4f48d?q=80&w=800' },
-            shimane: { eng: 'Shimane', icon: '🌅', text: '出雲大社與緣分', img: 'https://images.unsplash.com/photo-1621252179027-94459d278660?q=80&w=800' },
-            okayama: { eng: 'Okayama', icon: '🍑', text: '桃太郎與後樂園', img: 'https://images.unsplash.com/photo-1596464716127-f2a82984de30?q=80&w=800' },
-            hiroshima: { eng: 'Hiroshima', icon: '⛩️', text: '嚴島神社大鳥居', img: 'https://images.unsplash.com/photo-1549392557-046679545f44?q=80&w=800' },
-            yamaguchi: { eng: 'Yamaguchi', icon: '🐡', text: '錦帶橋與河豚', img: 'https://images.unsplash.com/photo-1599388144800-9831c0e3592f?q=80&w=800' },
-            tokushima: { eng: 'Tokushima', icon: '💃', text: '鳴門漩渦與阿波舞', img: 'https://images.unsplash.com/photo-1605649441113-17b9b1875d31?q=80&w=800' },
-            kagawa: { eng: 'Kagawa', icon: '🍜', text: '讚岐烏龍麵之鄉', img: 'https://images.unsplash.com/photo-1604514813560-1e4f5726db65?q=80&w=800' },
-            ehime: { eng: 'Ehime', icon: '🍊', text: '道後溫泉與蜜柑', img: 'https://images.unsplash.com/photo-1610427845722-671891516e87?q=80&w=800' },
-            kochi: { eng: 'Kochi', icon: '🐟', text: '桂濱與炙燒鰹魚', img: 'https://images.unsplash.com/photo-1610427845722-671891516e87?q=80&w=800' },
-            fukuoka: { eng: 'Fukuoka', icon: '🍜', text: '博多拉麵與屋台', img: 'https://images.unsplash.com/photo-1542051841857-5f90071e7989?q=80&w=800' },
-            saga: { eng: 'Saga', icon: '🏺', text: '熱氣球與有田燒', img: 'https://images.unsplash.com/photo-1621252179027-94459d278660?q=80&w=800' },
-            nagasaki: { eng: 'Nagasaki', icon: '🏮', text: '豪斯登堡與夜景', img: 'https://images.unsplash.com/photo-1571408018335-502213e4b786?q=80&w=800' },
-            kumamoto: { eng: 'Kumamoto', icon: '🐻', text: '熊本城與阿蘇山', img: 'https://images.unsplash.com/photo-1543881515-38b438b40810?q=80&w=800' },
-            oita: { eng: 'Oita', icon: '♨️', text: '別府由布院溫泉', img: 'https://images.unsplash.com/photo-1590457313835-09559e35824c?q=80&w=800' },
-            miyazaki: { eng: 'Miyazaki', icon: '🌴', text: '高千穗峽與芒果', img: 'https://images.unsplash.com/photo-1621252179027-94459d278660?q=80&w=800' },
-            kagoshima: { eng: 'Kagoshima', icon: '🌋', text: '櫻島火山與黑豬', img: 'https://images.unsplash.com/photo-1621252179027-94459d278660?q=80&w=800' },
-            okinawa: { eng: 'Okinawa', icon: '🏝️', text: '首里城與沖繩海', img: 'https://images.unsplash.com/photo-1534067783941-51c9c23ecefd?q=80&w=800' }
+            hokkaido: { eng: 'Hokkaido', icon: '🌲', text: '美瑛：聖誕之樹', img: 'https://i0.wp.com/journey.tw/wp-content/uploads/2025/01/20250103171503_0_659bdb.jpg?resize=1100%2C734&quality=99&ssl=1q=80&w=800' },
+            aomori: { eng: 'Aomori', icon: '🍎', text: '弘前公園：櫻花地毯', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPUC0lMZ8eMxaNIT-z4fBUvXoJfhe17Aa-NQ&sq=80&w=800' },
+            iwate: { eng: 'Iwate', icon: '🥣', text: '中尊寺：金色堂', img: 'https://www.bring-you.info/imgs/2024/08/Chuson-ji-13.jpg? q=80&w=800' },
+            miyagi: { eng: 'Miyagi', icon: '🌊', text: '松島：日本三景', img: 'https://dnqqzhyfsjh82.cloudfront.net/area/sendai/hero_default_thum.jpg?q=80&w=800' },
+            akita: { eng: 'Akita', icon: '🐕', text: '乳頭溫泉鄉：秘湯', img: 'https://stayakita.com/assets/uploads/2020/03/Akita-dog.jpg?q=80&w=800' },
+            yamagata: { eng: 'Yamagata', icon: '♨️', text: '銀山溫泉：大正浪漫', img: 'https://cdn.zekkei-japan.jp/images/areas/f4221cc885f19f8aed2b803ed6b524f7.jpg?q=80&w=800' },
+            fukushima: { eng: 'Fukushima', icon: '🏠', text: '大內宿：江戶驛站', img: 'https://rimage.gnst.jp/livejapan.com/public/article/detail/a/30/00/a3000004/img/zh-tw/a3000004_main.jpg?q=80&w=800' },
+            ibaraki: { eng: 'Ibaraki', icon: '🌸', text: '常陸海濱公園：粉蝶花', img: 'https://imgcp.aacdn.jp/img-a/1440/auto/global-aaj-front/article/2017/03/58d8c0ee86308_58d8be342959a_457274584.jpg?q=80&w=800' },
+            tochigi: { eng: 'Tochigi', icon: '⛩️', text: '日光東照宮：陽明門', img: 'https://www.agoda.com/wp-content/uploads/2021/03/Nikko-Tosho-gu-things-to-do-in-Tochigi-Japan.jpg?q=80&w=800' },
+            gunma: { eng: 'Gunma', icon: '♨️', text: '草津溫泉：湯畑', img: 'https://images.ctfassets.net/2uxxifu5nzlv/1g8sMhI6x2zWwNUVHb2RHl/0a412d748a312b72ce694b8f8a16fd9a/img_01-04.jpg?q=80&w=800' },
+            saitama: { eng: 'Saitama', icon: '🏮', text: '川越：時之鐘', img: 'https://d1grca2t3zpuug.cloudfront.net/2022/07/kkk5060904_m.jpg?q=80&w=800' },
+            chiba: { eng: 'Chiba', icon: '🏰', text: '東京迪士尼樂園', img: 'https://res.klook.com/image/upload/activities/bzpnjvymuce1p6zzspd8.jpg?q=80&w=800' },
+            tokyo: { eng: 'Tokyo', icon: '🗼', text: '澀谷十字路口', img: 'https://d1grca2t3zpuug.cloudfront.net/2024/08/66bcbb9e3ce18-870x500.webp?q=80&w=800' },
+            kanagawa: { eng: 'Kanagawa', icon: '⛩️', text: '鎌倉：長谷寺大佛', img: 'https://res.klook.com/image/upload/c_crop,h_1066,w_1706,x_95,y_7,z_0.4/w_750,h_469,c_fill,q_85/w_80,x_15,y_15,g_south_west,l_Klook_water_br_trans_yhcmh3/activities/oghjmianwd5ps6r5i2x2.jpg?q=80&w=800' },
+            niigata: { eng: 'Niigata', icon: '❄️', text: '越後湯澤：雪國之旅', img: 'https://d2r4787i3zn8dn.cloudfront.net/site_images/images/1316b1d14682f280f0fbfddf8746a1d765690eea.jpg?1547619377?q=80&w=800' },
+            toyama: { eng: 'Toyama', icon: '⛰️', text: '立山黑部：雪之大谷', img: 'https://www.hotelscombined.com.tw/news/wp-content/uploads/sites/316/2018/09/F.jpg?q=80&w=800' },
+            ishikawa: { eng: 'Ishikawa', icon: '✨', text: '金澤：兼六園', img: 'https://simontamhk.com/wp-content/uploads/2024/09/%E9%87%91%E6%BE%A4%E6%97%85%E9%81%8A%E6%99%AF%E9%BB%9E-%E5%BF%85%E5%8E%BB%E6%99%AF%E9%BB%9E%E7%BE%8E%E9%A3%9F%E4%BD%8F%E5%AE%BF%E7%9C%8B%E9%80%99%E7%AF%87%E6%87%B6%E4%BA%BA%E5%8C%852-1160x856.jpg?q=80&w=800' },
+            fukui: { eng: 'Fukui', icon: '🦖', text: '福井：恐龍博物館', img: 'https://d1grca2t3zpuug.cloudfront.net/2025/11/fukui-station-251114-2-1920x1282-1763102266.webp?q=80&w=800' },
+            yamanashi: { eng: 'Yamanashi', icon: '🗻', text: '新倉山淺間公園：忠靈塔', img: 'https://img.activityjapan.com/wi/yamanashi-fall-sightseeing_thumb.jpg?202509260119&cf_origin?q=80&w=800' },
+            nagano: { eng: 'Nagano', icon: '🐒', text: '上高地：河童橋', img: 'https://storage.googleapis.com/stateless-nagoya-cat-tw/2023/12/40cd34dd-img_7923-scaled.jpg?q=80&w=800' },
+            gifu: { eng: 'Gifu', icon: '🏠', text: '白川鄉：合掌村', img: 'https://storage.googleapis.com/stateless-nagoya-cat-tw/2024/02/9f9d53e5-240126centriar%E7%99%BD%E5%B7%9D%E9%84%89.00_00_07_01.still024.png?q=80&w=800' },
+            shizuoka: { eng: 'Shizuoka', icon: '🗻', text: '三島大吊橋：富士絕景', img: 'https://www.agoda.com/wp-content/uploads/2024/10/Shizuoka-Japan.jpg?q=80&w=800' },
+            aichi: { eng: 'Aichi', icon: '🏯', text: '名古屋城：金鯱', img: 'https://blog.sakura.co/wp-content/uploads/2022/11/sakuraco_aichi-prefecture-thumbnail.png?q=80&w=800' },
+            mie: { eng: 'Mie', icon: '⛩️', text: '伊勢神宮：內宮', img: 'https://img.cooljapan-videos.com/files/articles/bxo23p8y/thumbnail/1b9e0808b2b49058f5a306a107127d8f.jpg.webp?q=80&w=800' },
+            shiga: { eng: 'Shiga', icon: '⛩️', text: '白鬚神社：水上鳥居', img: 'https://static.gltjp.com/glt/data/article/21000/20819/20241023_100820_050dae76_w1920.webp?q=80&w=800' },
+            kyoto: { eng: 'Kyoto', icon: '🏮', text: '伏見稻荷：千本鳥居', img: 'https://static.gltjp.com/glt/data/article/21000/20446/20230928_135932_24bbea23_w1920.webp?q=80&w=800' },
+            osaka: { eng: 'Osaka', icon: '🎢', text: '環球影城：瑪利歐', img: 'https://static.gltjp.com/glt/data/article/21000/20340/20230721_161251_3e1c08a0_w1920.webp?q=80&w=800' },
+            hyogo: { eng: 'Hyogo', icon: '🏯', text: '姬路城：白鷺城', img: 'https://www.ana.co.jp/japan-travel-planner/area/kinki/hyogo/0000004/img005.jpg?q=80&w=800' },
+            nara: { eng: 'Nara', icon: '🦌', text: '東大寺：大佛與鹿', img: 'https://img.activityjapan.com/wi/nara-tourist-spot_thumb.jpg?q=80&w=800' },
+            wakayama: { eng: 'Wakayama', icon: '⛩️', text: '那智大社：瀑布三重塔', img: 'https://assets.funliday.com/posts/wp-content/uploads/2024/10/09153611/top.jpg?q=80&w=800' },
+            tottori: { eng: 'Tottori', icon: '🏜️', text: '鳥取砂丘：沙漠幻影', img: 'https://cc.tvbs.com.tw/img/program/upload/2023/05/29/20230529180107-7e9726c0.jpg?q=80&w=800' },
+            shimane: { eng: 'Shimane', icon: '🌅', text: '出雲大社：巨型注連繩', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5jH8ST9Q0hRg3D2I9rd7SeDBAgLQY5eZFaQ&s?q=80&w=800' },
+            okayama: { eng: 'Okayama', icon: '🍑', text: '倉敷美觀地區', img: 'https://d28dpoj42hxr8c.cloudfront.net/files/user/images/blog/12661_kurashiki/kurashiki_250226_01.jpg?v=1740574324?q=80&w=800' },
+            hiroshima: { eng: 'Hiroshima', icon: '⛩️', text: '嚴島神社：水上鳥居', img: 'https://itinerary.colatour.com.tw/COLA_AppFiles/A03A_Tour/Itinerary/00237245/00237245-Main.JPG?q=80&w=800' },
+            yamaguchi: { eng: 'Yamaguchi', icon: '⛩️', text: '元乃隅神社：百道鳥居', img: 'https://japan-shrine.info/wp-content/uploads/DSC_3839.jpg?q=80&w=800' },
+            tokushima: { eng: 'Tokushima', icon: '🌀', text: '鳴門海峽：巨大漩渦', img: 'https://content.fun-japan.jp/renewal-prod/cms/articles/content/Mpf/Articles/2017/07/09/20170709-17-top-tokushima.jpg?q=80&w=800' },
+            kagawa: { eng: 'Kagawa', icon: '🍎', text: '直島：草間彌生紅南瓜', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQD8HOrOsoS-Wfr0CgJfP1HzNhphg0NqggV-g&s?q=80&w=800' },
+            ehime: { eng: 'Ehime', icon: '♨️', text: '道後溫泉：本館', img: 'https://lovetogo.tw/202506-shikoku/dogo-honkan/photo/20250619-1434-3560.jpg?q=80&w=800' },
+            kochi: { eng: 'Kochi', icon: '🌊', text: '四萬十川：沈下橋', img: 'https://static.gltjp.com/glt/data/article/12000/11248/20210611_044050_ccf9d720_w1920.webp?q=80&w=800' },
+            fukuoka: { eng: 'Fukuoka', icon: '🏮', text: '中洲屋台街', img: 'https://resources.matcha-jp.com/resize/720x2000/2022/07/22-128493.webp?q=80&w=800' },
+            saga: { eng: 'Saga', icon: '🎈', text: '佐賀國際熱氣球大會', img: 'https://www.welcometw.com/wp-content/uploads/2024/05/%E5%A4%A7%E9%AD%9A%E7%A5%9E%E7%A4%BE%E6%B5%B7%E4%B8%AD%E9%B3%A5%E5%B1%85-850x559.jpg?q=80&w=800' },
+            nagasaki: { eng: 'Nagasaki', icon: '🏮', text: '稻佐山夜景：千萬美金', img: 'https://www.nagasaki-tabinet.com/storage/special_features/276/responsive_images/bLSMpZQoOMOy6dnhlxAlWc4Gx4ajNpRNpD47FgfV__1639_1092.jpeg?q=80&w=800' },
+            kumamoto: { eng: 'Kumamoto', icon: '🏯', text: '熊本城：武者返', img: 'https://www.nippon.com/hk/ncommon/contents/guide-to-japan/188060/188060.jpg?q=80&w=800' },
+            oita: { eng: 'Oita', icon: '♨️', text: '由布院：金鱗湖', img: 'https://static.gltjp.com/glt/data/article/21000/20730/20240703_145410_9fc82771_w1920.webp?q=80&w=800' },
+            miyazaki: { eng: 'Miyazaki', icon: '🌴', text: '高千穗峽：划船趣', img: 'https://res.klook.com/image/upload/c_crop,h_1008,w_1612,x_0,y_33,z_0.4/w_750,h_469,c_fill,q_85/w_80,x_15,y_15,g_south_west,l_Klook_water_br_trans_yhcmh3/activities/dwg236uoarb4fblvfhpi.jpg?q=80&w=800' },
+            kagoshima: { eng: 'Kagoshima', icon: '🌋', text: '櫻島：活火山震撼', img: 'https://static.gltjp.com/glt/data/article/21000/20426/20230919_113255_6b94c48f_w1920.webp?q=80&w=800' },
+            okinawa: { eng: 'Okinawa', icon: '🏝️', text: '萬座毛：象鼻岩', img: 'https://d1grca2t3zpuug.cloudfront.net/2025/10/oki26654990_m-1200x628-1759643614.webp?q=80&w=800' }
         };
 
         let userData = JSON.parse(localStorage.getItem('japaholic_v4_data') || '{}');
@@ -389,6 +381,10 @@
             renderRecords(); updateUI();
         };
 
+        window.closeModal = () => {
+            document.getElementById('modal-overlay').style.display = 'none';
+        };
+
         document.getElementById('add-record-btn').onclick = () => {
             const date = document.getElementById('visit-date').value;
             const note = document.getElementById('visit-note').value;
@@ -419,7 +415,6 @@
             };
         });
 
-        document.getElementById('modal-close').onclick = () => document.getElementById('modal-overlay').style.display = 'none';
         updateUI();
     </script>
 </body>
